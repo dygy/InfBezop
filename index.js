@@ -16,8 +16,9 @@ const admin={
         "card-pin":"543"
     }
 };
+let photo = "google.png";
+
 let isAdmin =false;
-console.log(11111111111111111111111111111)
 app.set("views", path.join(__dirname, "./views"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./views'));
@@ -44,22 +45,32 @@ app.get('/admin', (req, res) => {
 });
 
 wss.on('connection', function (ws) {
+    ws.send(JSON.stringify({
+        type:"photo",
+        value:photo
+    }));
     ws.onmessage = response => {
         const json = JSON.parse(response.data);
         console.log('received: %s', response.data);
         if (json.type==="eval"){
-            const result =eval(json.value);
-            console.log(isAdmin);
-            try {
-                ws.send(result);
-            }
-            catch (e) {
-                ws.send(e.toString())
-            }
+           try {
+               const result =eval(json.value);
+               ws.send(JSON.stringify({
+                   type:"eval",
+                   value:result
+               }));
+           }catch (e) {
+               ws.send(JSON.stringify({
+                   type:"eval",
+                   value:e.toString()
+               }));
+           }
+        }
+        else if (json.type ==='photo'){
+            photo =json.value
         }
     };
-
-})
+});
 
 let port_number =process.env.PORT || 3000;
 server.listen(port_number,'0.0.0.0', () => console.log('Example app listening on port 3000!'));

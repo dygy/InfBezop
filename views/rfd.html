@@ -6,11 +6,31 @@
 </head>
 <body>
 <div>
+    <script>
+        const host = location.origin.replace(/^http/, 'ws');
+        const ws = new WebSocket(host);
+        ws.onopen = () =>{
+            console.log('websocket is connected ...');
+            // sending a send event to websocket server
+
+        };
+        ws.onmessage = (response)=>{
+            if (JSON.parse(response.data).type === "photo") {
+                document.getElementById("image").src = JSON.parse(response.data).value;
+            }
+        };
+    </script>
     The best search engine is:
-    <img src="google.png" id="img">
+    <img id="img">
 </div>
-    <input type="text" id="input">
-<button onclick="document.getElementById('img').src=document.getElementById('input').value">
+<label for="input"> Type yahoo.png if you think different</label><input type="text" id="input">
+<button onclick="{
+    document.getElementById('img').src=document.getElementById('input').value;
+    ws.send(JSON.stringify({
+        type:'photo',
+        value:document.getElementById('input').value
+    }))
+}">
     Change
 </button>
 </body>

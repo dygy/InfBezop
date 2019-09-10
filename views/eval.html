@@ -11,11 +11,12 @@
     ws.onopen = () =>{
         console.log('websocket is connected ...');
         // sending a send event to websocket server
-
     };
-    ws.onmessage = (resoponse)=>{
-        document.getElementById("result").innerText=resoponse.data;
-    }
+    ws.onmessage = (response)=>{
+        if (JSON.parse(response.data).type ==="eval") {
+            document.getElementById("result").innerText = JSON.parse(response.data).value;
+        }
+        };
     function onClick() {
         ws.send(JSON.stringify({
             type:'eval',
