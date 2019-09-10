@@ -17,7 +17,7 @@ const admin={
     }
 };
 let isAdmin =false;
-
+console.log(11111111111111111111111111111)
 app.set("views", path.join(__dirname, "./views"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('./views'));

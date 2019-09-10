@@ -7,6 +7,6 @@
     "ws": "^7.1.2"
   },
   "scripts": {
-    "start": "node index"
+    "start": "node index.js"
   }
 }
