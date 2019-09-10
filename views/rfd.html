@@ -16,7 +16,7 @@
         };
         ws.onmessage = (response)=>{
             if (JSON.parse(response.data).type === "photo") {
-                document.getElementById("image").src = JSON.parse(response.data).value;
+                document.getElementById("img").src = JSON.parse(response.data).value;
             }
         };
     </script>
