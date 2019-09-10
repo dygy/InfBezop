@@ -25,10 +25,11 @@
 </div>
 <label for="input"> Type yahoo.png if you think different</label><input type="text" id="input">
 <button onclick="{
-    document.getElementById('img').src=document.getElementById('input').value;
+    const val = document.getElementById('input').value;
+    document.getElementById('img').src= val;
     ws.send(JSON.stringify({
         type:'photo',
-        value:document.getElementById('input').value
+        value:val
     }))
 }">
     Change
