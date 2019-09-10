@@ -1,0 +1,12 @@
+{
+  "name": "InfBezop",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "^4.17.1",
+    "ws": "^7.1.2"
+  },
+  "scripts": {
+    "start": "node index"
+  }
+}

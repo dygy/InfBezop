@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const host = location.origin.replace(/^http/, 'ws');
+    const ws = new WebSocket(host);
+    ws.onopen = () =>{
+        console.log('websocket is connected ...');
+        // sending a send event to websocket server
+
+    };
+    ws.onmessage = (resoponse)=>{
+        document.getElementById("result").innerText=resoponse.data;
+    }
+    function onClick() {
+        ws.send(JSON.stringify({
+            type:'eval',
+            value: document.getElementById('Calc').value
+        }))
+    }
+</script>
+<input id="Calc" type="text" placeholder="Calculations">
+<button onclick="onClick()"> Calculate </button>
+<div id="result"></div>
+</body>
+</html>
